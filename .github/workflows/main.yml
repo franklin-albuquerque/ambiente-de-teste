@@ -6,17 +6,27 @@ on:
     - cron: "* */12 * * *"
   workflow_dispatch:
 
+  push:
+    branches:
+      - main
+
+
 jobs:
   generate:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+
     steps:
-      - uses: Platane/snk/svg-only@v2.2.1
-        id: snake-gif
+      - name: generate contribuicoes-github-animacao-cobrinha.svg
+        uses: Platane/snk/svg-only@v2
         with:
           github_user_name: franklin-albuquerque
-          svg_out_path: dist/contribuicoes-github-animacao-cobrinha.svg
+          outputs: |
+            dist/contribuicoes-github-animacao-cobrinha.svg
+            dist/contribuicoes-github-animacao-cobrinha-dark.svg?palette=github-dark
 
-      - uses: crazy-max/ghaction-github-pages@v2
+      - name: push contribuicoes-github-animacao-cobrinha.svg to the output branch
+        uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
           target_branch: output
           build_dir: dist
