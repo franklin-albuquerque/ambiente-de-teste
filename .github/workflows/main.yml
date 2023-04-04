@@ -1,0 +1,25 @@
+name: Generate Datas
+
+on:
+  # Executar a cada 12 horas
+  schedule:
+    - cron: "* */12 * * *"
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      # Gerar animação da cobrinha
+      - uses: Platane/snk/svg-only@main
+        id: snake-gif
+        with:
+          github_user_name: franklin-albuquerque
+          svg_out_path: dist/contribuicoes-github-animacao-cobrinha.svg
+
+      - uses: crazy-max/ghaction-github-pages@gh-pages
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
