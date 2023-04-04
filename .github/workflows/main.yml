@@ -1,4 +1,4 @@
-name: Generate Datas
+name: Gerar animação
 
 on:
   # Executar a cada 12 horas
@@ -10,14 +10,13 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
-      # Gerar animação da cobrinha
-      - uses: Platane/snk/svg-only@main
+      - uses: Platane/snk/svg-only@master
         id: snake-gif
         with:
           github_user_name: franklin-albuquerque
           svg_out_path: dist/contribuicoes-github-animacao-cobrinha.svg
 
-      - uses: crazy-max/ghaction-github-pages@@v3.1.0
+      - uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
           target_branch: output
           build_dir: dist
