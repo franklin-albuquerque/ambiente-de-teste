@@ -16,6 +16,8 @@ jobs:
     timeout-minutes: 10
 
     steps:
+      - uses: actions/checkout@main
+
       - name: Gerar animação do gráfico de contribuições
         uses: Platane/snk/svg-only@main
         with:
