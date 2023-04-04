@@ -16,7 +16,7 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - uses: action/checkout@v3.5
+      - uses: action/checkout@v3
 
       - name: Gerar contribuicoes-github-animacao-cobrinha.svg
         uses: Platane/snk@master
