@@ -16,8 +16,6 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - uses: action/checkout@v2
-
       - name: Gerar contribuicoes-github-animacao-cobrinha.svg
         uses: Platane/snk@master
         with:
@@ -35,10 +33,10 @@ jobs:
           branch: master
           force: true
 
-      - name: Enviar contribuicoes-github-animacao-cobrinha.svg para o branch main
+      - name: Enviar contribuicoes-github-animacao-cobrinha.svg para o branch output
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
-          target_branch: main
+          target_branch: output
           build_dir: dist
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
