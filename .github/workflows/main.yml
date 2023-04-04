@@ -16,22 +16,13 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - name: Gerar contribuicoes-github-animacao-cobrinha.svg
-        uses: Platane/snk@master
+      - name: Gerar animação do gráfico de contribuições
+        uses: Platane/snk/svg-only@main
         with:
           github_user_name: franklin-albuquerque
           outputs: |
             dist/contribuicoes-github-animacao-cobrinha.svg
             dist/contribuicoes-github-animacao-cobrinha-dark.svg?palette=github-dark
-
-      - run: git status
-
-      - name: Enviar alterações
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: master
-          force: true
 
       - name: Enviar contribuicoes-github-animacao-cobrinha.svg para o branch output
         uses: crazy-max/ghaction-github-pages@v3.1.0
