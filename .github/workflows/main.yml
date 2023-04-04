@@ -1,9 +1,9 @@
 name: Gerar animação
 
 on:
-  # Executar a cada 12 horas
+  # Atualizar a cada 6 horas
   schedule:
-    - cron: "* */12 * * *"
+    - cron: "* */6 * * *"
   workflow_dispatch:
 
   push:
@@ -16,14 +16,16 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - name: generate contribuicoes-github-animacao-cobrinha.svg
+      - uses: action/checkout@v3.5
+
+      - name: Gerar contribuicoes-github-animacao-cobrinha.svg
         uses: Platane/snk@master
         with:
           github_user_name: franklin-albuquerque
           outputs: |
             dist/contribuicoes-github-animacao-cobrinha.svg
             dist/contribuicoes-github-animacao-cobrinha-dark.svg?palette=github-dark
-            
+
       - run: git status
 
       - name: Enviar alterações
@@ -33,7 +35,7 @@ jobs:
           branch: master
           force: true
 
-      - name: push contribuicoes-github-animacao-cobrinha.svg to the output branch
+      - name: Enviar contribuicoes-github-animacao-cobrinha.svg para o branch main
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
           target_branch: main
