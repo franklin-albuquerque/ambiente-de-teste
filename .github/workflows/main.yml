@@ -17,7 +17,7 @@ jobs:
           github_user_name: franklin-albuquerque
           svg_out_path: dist/contribuicoes-github-animacao-cobrinha.svg
 
-      - uses: crazy-max/ghaction-github-pages@gh-pages
+      - uses: crazy-max/ghaction-github-pages@@v3.1.0
         with:
           target_branch: output
           build_dir: dist
