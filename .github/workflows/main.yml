@@ -1,9 +1,9 @@
-name: Gerar animação
+name: Animação do gráfico de contribuições
 
 on:
-  # Atualizar a cada 6 horas
+  # Atualiza a cada 12 horas
   schedule:
-    - cron: "* */6 * * *"
+    - cron: "* */12 * * *"
   workflow_dispatch:
 
   push:
@@ -13,12 +13,11 @@ on:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
 
     steps:
       - uses: actions/checkout@main
 
-      - name: Gerar animação do gráfico de contribuições
+      - name: Gerar animação da cobrinha
         uses: Platane/snk/svg-only@main
         with:
           github_user_name: franklin-albuquerque
@@ -26,8 +25,14 @@ jobs:
             dist/github-contribution-grid-snake.svg
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark
 
-      - name: Enviar github-contribution-grid-snake.svg para o branch output
-        uses: crazy-max/ghaction-github-pages@dev
+      - name: Enviar alterações
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: master
+          force: true
+
+      - uses: crazy-max/ghaction-github-pages@dev
         with:
           target_branch: output
           build_dir: dist
