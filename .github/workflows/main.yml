@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout
-      - uses: actions/checkout@main
+        uses: actions/checkout@main
 
       - name: Importar chave GPG
         uses: crazy-max/ghaction-github-pages@master
