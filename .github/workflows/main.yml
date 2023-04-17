@@ -1,9 +1,9 @@
 name: Animação do gráfico de contribuições
 
 on:
-  # Atualiza a cada 24 horas
+  # Atualiza a cada 48 horas
   schedule:
-    - cron: "* */24 * * *"
+    - cron: "* */48 * * *"
   workflow_dispatch:
 
   push:
@@ -15,33 +15,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@main
-
-      - name: Importar chave GPG
+      -
+        name: Importar chave GPG
+        id: import_gpg
         uses: crazy-max/ghaction-import-gpg@master
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
+          fingerprint: ${{ secrets.FINGERPRINT }}
           git_user_signingkey: true
           git_commit_gpgsign: true
-
-      - name: Gerar animação da cobrinha
+      -
+        name: Gerar animação da cobrinha
         uses: Platane/snk/svg-only@main
         with:
           github_user_name: franklin-albuquerque
           outputs: |
             dist/github-contribution-grid-snake.svg
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark
-
-      - name: Enviar alterações
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
-          force: true
-
-      - uses: crazy-max/ghaction-github-pages@dev
+      -
+        name: Enviar alterações
+        uses: crazy-max/ghaction-github-pages@dev
         with:
           target_branch: output
           build_dir: dist
